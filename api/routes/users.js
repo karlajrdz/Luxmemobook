@@ -18,7 +18,7 @@ const router = express.Router();
 // })
 
 // router.get("/checkadmin/:id", verifyAdmin, (req,res,next)=>{
-//   res.send("hello admin, you are logged in and you can delete all accounts")
+//   res.send("hello admin you are logged in and you can delete all accounts")
 // })
 
 //UPDATE
