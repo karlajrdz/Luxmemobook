@@ -30,7 +30,7 @@ router.get("/find/:id", getHotel);
 //ROUTES
 
 router.get("/", getHotels);
-router.get("/countByCity", countByCity);
+//router.get("/countByCity", countByCity);
 router.get("/countByType", countByType);
 //router.get("/room/:id", getHotelRooms);
 

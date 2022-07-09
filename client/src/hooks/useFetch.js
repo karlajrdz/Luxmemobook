@@ -19,7 +19,7 @@ const useFetch = (url) => {
     };
     fetchData();
   }, [url]);
-
+//if the first fetch doesnt work 
   const reFetch = async () => {
     setLoading(true);
     try {
