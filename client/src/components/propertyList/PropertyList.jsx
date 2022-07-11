@@ -2,8 +2,8 @@ import useFetch from "../../hooks/useFetch";
 import "./propertyList.css";
 
 const PropertyList = () => {
-  const { data, loading } = useFetch("/hotels/countByType");
-  //array to pass all images
+  const { data, loading, error } = useFetch("/hotels/countByType");
+  // pass all images
   const images = [
     "https://dynaimage.cdn.cnn.com/cnn/q_auto,w_634,c_fill,g_auto,h_357,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F180508103900-most-exclusive-hotels----resort-at-pedregal---air-view-resort-left-side.jpg",
     "https://img.jamesedition.com/listing_images/2022/07/04/20/11/32/54b63214-9bc9-4699-8408-86515e5bcd80/je/1100xxs.jpg](https://img.jamesedition.com/listing_images/2022/07/04/20/11/32/54b63214-9bc9-4699-8408-86515e5bcd80/je/1100xxs.jpg",
@@ -18,14 +18,16 @@ const PropertyList = () => {
       ) : (
         <>
           {data &&
-            images.map((img, i) => (
+            images.map((img,i) => (
               <div className="pListItem" key={i}>
-                <img src={img} alt="" className="pListImg" />
+                <img
+                  src={img}
+                  alt=""
+                  className="pListImg"
+                />
                 <div className="pListTitles">
                   <h1>{data[i]?.type}</h1>
-                  <h2>
-                    {data[i]?.count} {data[i]?.type}
-                  </h2>
+                  <h2>{data[i]?.count} {data[i]?.type}</h2>
                 </div>
               </div>
             ))}

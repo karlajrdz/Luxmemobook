@@ -1,11 +1,10 @@
 .header {
   background-color: #223647;
-  color: #bbd38d;
+  color: #869a61;
   display: flex;
   justify-content: center;
   position: relative;
 }
-
 .headerContainer {
   width: 100%;
   max-width: 1024px;
@@ -66,7 +65,7 @@
   position: relative;
   font-size: 37px;
   line-height: 50px;
-  
+  font-family: "Cardo", serif;
 }
 .headerDesc {
   font-size: 1.5rem;
@@ -74,12 +73,12 @@
   position: relative;
   margin-top: 2rem;
 }
-.headerBtn{
+.headerBtn {
   align-items: center;
   border: 2px solid;
   border-radius: 0;
   display: flex;
-  font-family: TradeGothicLTPro-BdCn20,Arial Narrow,Arial,sans-serif;
+  font-family: TradeGothicLTPro-BdCn20, Arial Narrow, Arial, sans-serif;
   font-size: 16px;
   height: 50px;
   justify-content: center;

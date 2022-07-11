@@ -1,7 +1,9 @@
+import useFetch from "../../hooks/useFetch";
 import "./featuredProperties.css";
-
+// eslint-disable-next-line
 const FeaturedProperties = () => {
-  //const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
+  const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
+// eslint-disable-next-line
   return (
     <div className="fp">
       <div className="fpItem">
@@ -12,9 +14,9 @@ const FeaturedProperties = () => {
         />
         <span className="fpName">Maison  Blanc Bleu </span>
         <span className="fpCity">Gouverneur, St Barts</span>
-        <span className="fpPrice">Starting from $5,714</span>
+        <span className="fpPrice">from $5,714</span>
         <div className="fpRating">
-          <button>8.4</button>
+          <button>9.4</button>
           <span>Excellent</span>
         </div>
       </div>
@@ -26,9 +28,9 @@ const FeaturedProperties = () => {
         />
         <span className="fpName">Casa Frizer</span>
         <span className="fpCity">Los Cabos , México</span>
-        <span className="fpPrice">Starting from $68,725</span>
+        <span className="fpPrice">from $68,725</span>
         <div className="fpRating">
-          <button>8.5</button>
+          <button>9.5</button>
           <span>Exceptional</span>
         </div>
       </div>
@@ -40,7 +42,7 @@ const FeaturedProperties = () => {
         />
         <span className="fpName">Sunset Ridge</span>
         <span className="fpCity">Los Angeles, U.S</span>
-        <span className="fpPrice">Starting from 14,126</span>
+        <span className="fpPrice">from 14,126</span>
         <div className="fpRating">
           <button>9.4</button>
           <span>Excellent</span>
@@ -54,7 +56,7 @@ const FeaturedProperties = () => {
         />
         <span className="fpName">Tagomago Private Island</span>
         <span className="fpCity">Ibiza, Spain</span>
-        <span className="fpPrice">Starting from $17,895</span>
+        <span className="fpPrice">from $17,895</span>
         <div className="fpRating">
           <button>9.7</button>
           <span>Excellent</span>

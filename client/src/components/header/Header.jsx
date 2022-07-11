@@ -1,25 +1,23 @@
 import {
-//  faBuildingWheat,
-  //faRankingStar,
- faCalendarDays,
-  //faCar,
-faPerson,
-  //faPlane,
-  //faTaxi,
+  faBed,
+  faCalendarDays,
+  faPerson,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.css";
 import { DateRange } from "react-date-range";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -34,6 +32,7 @@ const Header = ({ type }) => {
   });
 
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -44,8 +43,11 @@ const Header = ({ type }) => {
     });
   };
 
+  const { dispatch } = useContext(SearchContext);
+
   const handleSearch = () => {
-    navigate("/hotels", { state: { destination, date, options } });
+    dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
+    navigate("/hotels", { state: { destination, dates, options } });
   };
 
   return (
@@ -55,21 +57,27 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-
         {type !== "list" && (
           <>
-            <h1 className="headerTitle">   Your next luxury escape at the touch of a button.</h1>
+            <h1 className="headerTitle">
+              {" "}
+              Your next luxury escape at the touch of a button.
+            </h1>
             <p className="headerDesc">
-              Luxury villas, hotels, city apartments 
-              and the most exclusive mansions to rent in the most beautiful destinations
+              Luxury villas, hotels, city apartments and the most exclusive
+              mansions to rent in the most beautiful destinations
+              <style>
+                @import
+                url('https://fonts.googleapis.com/css2?family=Cardo:ital@1&display=swap');
+              </style>
             </p>
-            <button className="headerBtn">Sign in</button>
+            {!user && <button className="headerBtn">Sign in / Register</button>}
             <div className="headerSearch">
               <div className="headerSearchItem">
-                
+                <FontAwesomeIcon icon={faBed} className="headerIcon" />
                 <input
                   type="text"
-                  placeholder="Where is your next travel?"
+                  placeholder="Where to next?"
                   className="headerSearchInput"
                   onChange={(e) => setDestination(e.target.value)}
                 />
@@ -79,16 +87,16 @@ const Header = ({ type }) => {
                 <span
                   onClick={() => setOpenDate(!openDate)}
                   className="headerSearchText"
-                >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-                  date[0].endDate,
+                >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+                  dates[0].endDate,
                   "MM/dd/yyyy"
                 )}`}</span>
                 {openDate && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                     moveRangeOnFirstSelection={false}
-                    ranges={date}
+                    ranges={dates}
                     className="date"
                     minDate={new Date()}
                   />
@@ -145,7 +153,7 @@ const Header = ({ type }) => {
                       </div>
                     </div>
                     <div className="optionItem">
-                      <span className="optionText">Rooms</span>
+                      <span className="optionText">Room</span>
                       <div className="optionCounter">
                         <button
                           disabled={options.room <= 1}
@@ -182,4 +190,3 @@ const Header = ({ type }) => {
 };
 
 export default Header;
-
