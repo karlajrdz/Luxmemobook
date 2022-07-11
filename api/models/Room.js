@@ -17,7 +17,6 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    //RESTRICTION FOR THE RESERVATATION
     roomNumbers: [{ number: Number, unavailableDates: {type: [Date]}}],
   },
   { timestamps: true }

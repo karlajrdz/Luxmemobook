@@ -1,3 +1,5 @@
+
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -19,7 +21,7 @@ const useFetch = (url) => {
     };
     fetchData();
   }, [url]);
-//if the first fetch doesnt work 
+
   const reFetch = async () => {
     setLoading(true);
     try {

@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 const HotelSchema = new mongoose.Schema({
   name: {
     type: String,
-    //no hotel without hotel name
     required: true,
   },
   type: {

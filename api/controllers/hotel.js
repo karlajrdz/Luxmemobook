@@ -11,7 +11,6 @@ export const createHotel = async (req, res, next) => {
     next(err);
   }
 };
-//api request is going to decide if is admin can update if not send error
 export const updateHotel = async (req, res, next) => {
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
@@ -43,44 +42,11 @@ export const getHotel = async (req, res, next) => {
 export const getHotels = async (req, res, next) => {
   const { min, max, ...others } = req.query;
   try {
-    //condition greater ,more tan minimun and less than max 
     const hotels = await Hotel.find({
       ...others,
-      cheapestPrice: { $gt: min | 150, $lt: max || 770000 },
+      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
     }).limit(req.query.limit);
     res.status(200).json(hotels);
-  } catch (err) {
-    next(err);
-  }
-};
-export const deleteRoom = async (req, res, next) => {
-  const hotelId = req.params.hotelid;
-  try {
-    await Room.findByIdAndDelete(req.params.id);
-    try {
-      await Hotel.findByIdAndUpdate(hotelId, {
-        $pull: { rooms: req.params.id },
-      });
-    } catch (err) {
-      next(err);
-    }
-    res.status(200).json("Room has been deleted.");
-  } catch (err) {
-    next(err);
-  }
-};
-export const getRoom = async (req, res, next) => {
-  try {
-    const room = await Room.findById(req.params.id);
-    res.status(200).json(room);
-  } catch (err) {
-    next(err);
-  }
-};
-export const getRooms = async (req, res, next) => {
-  try {
-    const rooms = await Room.find();
-    res.status(200).json(rooms);
   } catch (err) {
     next(err);
   }
@@ -90,7 +56,6 @@ export const countByCity = async (req, res, next) => {
   try {
     const list = await Promise.all(
       cities.map((city) => {
-        //usning mongobd count document doesnt fetch all the data
         return Hotel.countDocuments({ city: city });
       })
     );
@@ -99,7 +64,6 @@ export const countByCity = async (req, res, next) => {
     next(err);
   }
 };
-//to show the amount of properties by type at at featuress
 export const countByType = async (req, res, next) => {
   try {
     const hotelCount = await Hotel.countDocuments({ type: "hotel" });
@@ -115,6 +79,20 @@ export const countByType = async (req, res, next) => {
       { type: "villas", count: villaCount },
       { type: "cabins", count: cabinCount },
     ]);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getHotelRooms = async (req, res, next) => {
+  try {
+    const hotel = await Hotel.findById(req.params.id);
+    const list = await Promise.all(
+      hotel.rooms.map((room) => {
+        return Room.findById(room);
+      })
+    );
+    res.status(200).json(list)
   } catch (err) {
     next(err);
   }

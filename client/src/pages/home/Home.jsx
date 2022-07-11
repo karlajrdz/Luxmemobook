@@ -1,3 +1,5 @@
+
+
 import Featured from "../../components/featured/Featured";
 import FeaturedProperties from "../../components/featuredProperties/FeaturedProperties";
 import Footer from "../../components/footer/Footer";
@@ -14,10 +16,9 @@ const Home = () => {
       <Header/>
       <div className="homeContainer">
         <Featured/>
-        <h1 className="homeTitle">Browse by property type</h1>
+        <h1 className="homeTitle">Choose by category</h1>
         <PropertyList/>
-        
-        <h1 className="homeTitle">The most exclusive properties</h1>
+        <h1 className="homeTitle">Find a stay in our most popular destinations</h1>
         <FeaturedProperties/>
         <MailList/>
         <Footer/>
